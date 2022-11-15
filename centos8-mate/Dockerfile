@@ -1,6 +1,6 @@
 # https://github.com/danchitnis/container-xrdp
 
-FROM centos:8
+FROM rockylinux:8
 
 RUN yum -y update
 
@@ -12,7 +12,7 @@ RUN bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
 
 RUN yum install -y xrdp xorgxrdp
 
-RUN yum -y install sudo nload passwd nano
+RUN yum -y install sudo nload passwd nano firefox
 
 RUN yum -y install pluma caja-open-terminal
 

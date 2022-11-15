@@ -1,10 +1,12 @@
 # https://github.com/danchitnis/container-xrdp
 
-FROM centos:8
+FROM rockylinux:8
 
 RUN yum -y update
 
 RUN yum -y install epel-release
+
+RUN /usr/bin/crb enable
 
 RUN yum -y groupinstall xfce base-x
 
@@ -12,7 +14,7 @@ RUN bash -c 'echo PREFERRED=/usr/bin/xfce4-session > /etc/sysconfig/desktop'
 
 RUN yum install -y xrdp xorgxrdp
 
-RUN yum -y install sudo nload passwd nano gedit
+RUN yum -y install sudo nload passwd nano gedit firefox
 
 COPY ./build/xrdp.ini /etc/xrdp/
 
