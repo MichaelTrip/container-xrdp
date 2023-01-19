@@ -14,19 +14,12 @@ RUN dnf -y install @mate-applications
 
 RUN bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
 
-RUN dnf install -y xrdp xorgxrdp openssh
-
-RUN dnf -y install sudo nload passwd nano pluma
+RUN dnf install -y xrdp xorgxrdp openssh && dnf -y install sudo nload passwd nano pluma firefox chromium
 
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
 
 # INSTALL VSCODE
-RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-
-RUN dnf check-update
-RUN dnf -y install code
-
-RUN dnf clean all
+RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo && dnf check-update && dnf -y install code && dnf clean all'
 
 ##### END of installations
 
