@@ -9,4 +9,6 @@ fi
 #. /etc/X11/Xsession
 
 # XFCE
+unset $DBUS_SESSION_BUS_ADDRESS
+unset DBUS_SESSION_BUS_ADDRESS
 startxfce4

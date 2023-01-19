@@ -8,9 +8,15 @@ RUN dnf -y groupinstall xfce
 
 RUN bash -c 'echo PREFERRED=/usr/bin/xfce4-session > /etc/sysconfig/desktop'
 
-RUN dnf install -y xrdp xorgxrdp
+RUN dnf install -y xrdp xorgxrdp && dnf -y install sudo nload passwd nano gedit firefox chromium
 
-RUN dnf -y install sudo nload passwd nano gedit
+# INSTALL VSCODE
+RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo && dnf check-update && dnf -y install code'
+
+
+# Remove certain things due to errors
+RUN dnf -y remove xfce4-power-manager && rm -rf /etc/xdg/autostart/xfce-polkit.desktop && dnf clean all
+
 
 RUN dnf clean all
 
